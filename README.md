@@ -5,7 +5,7 @@
 1. Install dependencies:
 
    ```bash
-   npm install --legacy-peer-deps
+   npm install
 
    npx react-native run-ios
    # or
