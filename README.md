@@ -1,50 +1,43 @@
-# Welcome to your Expo app 👋
+# MoviesChallange
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Setup
 
-## Get started
-
-1. Install dependencies
+1. Install dependencies:
 
    ```bash
-   npm install
-   ```
+   npm install --legacy-peer-deps
 
-2. Start the app
+   npx react-native run-ios
+   # or
+   npx react-native run-android
 
-   ```bash
-   npx expo start
-   ```
+   Test
+   npm test
+   
 
-In the output, you'll find options to open the app in a
+2. Useful Links
+   React Native: https://reactnative.dev
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   React Navigation: https://reactnavigation.org
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   React Query: https://tanstack.com/query/latest
 
-## Get a fresh project
+   React Native UI Lib: https://wix.github.io/react-native-ui-lib/
 
-When you're ready, run:
+   React Native Reanimated: https://docs.swmansion.com/react-native-reanimated/
 
-```bash
-npm run reset-project
-```
+   Testing Library for React Native: https://testing-library.com/docs/react-native-testing-library/intro
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+   Jest: https://jestjs.io/
 
-## Learn more
+3. API Key Setup
+   Before running the app, you need to set your API key in a .env file.
 
-To learn more about developing your project with Expo, look at the following resources:
+   API_KEY=your_api_key_here
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+4. Notes
+   Use npm install --legacy-peer-deps to avoid dependency resolution conflicts.
 
-## Join the community
+   Make sure you have Xcode (for iOS) or Android Studio (for Android) properly set up.
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   For troubleshooting React Native environment setup, see the official guide: https://reactnative.dev/docs/environment-setup
