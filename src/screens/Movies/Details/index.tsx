@@ -1,19 +1,27 @@
-import {View, Text, Image} from 'react-native-ui-lib';
-import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import { Image, Text, View } from 'react-native-ui-lib';
 
-import {MoviesScreenProps} from '../../../types/navigator';
+import { MoviesScreenProps } from '../../../types/navigator';
 
 import useGetMovieById from '../../../hooks/movies/useGetMovieById';
 
-import {Movie} from '../../../models/movies';
+import { BASE_IMAGE_URL } from '../../../constants';
 import router from '../../../constants/router';
-import {BASE_IMAGE_URL} from '../../../constants';
 
 import Loading from '../../../components/Loading';
 
 import styles from './styles';
 
+/**
+ * Props for the MovieDetails.
+ */
 type Props = MoviesScreenProps<router.movieDetails>;
+/**
+ * MovieDetails screen displays detailed information about a selected movie
+ *
+ * @param {Props} props - Screen props
+ * @returns {JSX.Element} The rendered movie details screen.
+ */
 const MovieDetails = ({route}: Props) => {
   const {params} = route;
   const {movieId} = params;

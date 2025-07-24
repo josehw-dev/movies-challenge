@@ -1,10 +1,10 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import type {AppStackParamList} from '../types/navigator';
 import router from '../constants/router';
+import type { AppStackParamList } from '../types/navigator';
 
-import MovieList from '../screens/Movies/List';
 import MovieDetails from '../screens/Movies/Details';
+import MovieList from '../screens/Movies/List';
 
 
 const AppStack = createStackNavigator<AppStackParamList>();
@@ -16,7 +16,12 @@ const options = {
   }
 };
 
-const AppNavigator = () => {
+/**
+ * Stack navigator for the main movie-related screens.
+ * Includes Movie List and Movie Details screens.
+ */
+
+const AppNavigator: React.FC = () => {
   const initialScreen = router.moviesList;
 
   return (
