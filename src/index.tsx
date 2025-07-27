@@ -3,6 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import Navigator from './navigator';
 import queryClient from './state/queryClient';
+import './theme';
 
 /**
  * Root app component that sets up providers for React Query and React Navigation.

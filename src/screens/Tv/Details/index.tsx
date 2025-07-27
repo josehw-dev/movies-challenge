@@ -2,9 +2,9 @@ import MaterialIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import { Image, Text, TouchableOpacity, View } from 'react-native-ui-lib';
 
-import { MoviesStackProps } from '../../../types/navigator';
+import { TvStackProps } from '../../../types/navigator';
 
-import useGetMovieById from '../../../hooks/movies/useGetMovieById';
+import useGetTvById from '../../../hooks/tv/useGetTvById';
 
 import { BASE_IMAGE_URL } from '../../../constants';
 import router from '../../../constants/router';
@@ -14,21 +14,21 @@ import Loading from '../../../components/Loading';
 import styles from './styles';
 
 /**
- * Props for the MovieDetails.
+ * Props for the Tv Details.
  */
-type Props = MoviesStackProps<router.movieDetails>;
+type Props = TvStackProps<router.tvDetails>;
 /**
- * MovieDetails screen displays detailed information about a selected movie
+ * Tv Details screen displays detailed information about a selected movie
  *
  * @param {Props} props - Screen props
- * @returns {JSX.Element} The rendered movie details screen.
+ * @returns {JSX.Element} The rendered tv details screen.
  */
-const MovieDetails = ({route, navigation}: Props) => {
+const TvDetails = ({route, navigation}: Props) => {
   const {params} = route;
-  const {movieId} = params;
+  const {tvId} = params;
 
-  const {data, isLoading} = useGetMovieById(movieId);
-  const {backdrop_path, title, overview} = data || {};
+  const {data, isLoading} = useGetTvById(tvId);
+  const {backdrop_path, name, overview} = data || {};
  
   if (isLoading) {
     return <Loading />;
@@ -48,7 +48,7 @@ const MovieDetails = ({route, navigation}: Props) => {
         <View flex paddingH-20>
           <ScrollView style={{flex: 1}}>
             <Text center white marginB-20 h2>
-              {title}
+              {name}
             </Text>
 
             <Text white p2>
@@ -61,4 +61,4 @@ const MovieDetails = ({route, navigation}: Props) => {
   );
 };
 
-export default MovieDetails;
+export default TvDetails;

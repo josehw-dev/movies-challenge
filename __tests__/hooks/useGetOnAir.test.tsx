@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react-native';
 
-import { moviesResponse } from '../../mocks/data/movies';
-import useGetMovies from '../../src/hooks/movies/useGetMovies';
+import { tvResponse } from '../../mocks/data/tvShows';
+import useGetOnAir from '../../src/hooks/tv/useGetOnAir';
 import api from '../../src/utils/api';
 
 jest.mock('../../src/utils/api');
@@ -13,23 +13,23 @@ const wrapper = ({ children }: any) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
 
-describe('useGetMovies', () => {
+describe('useGetOnAir', () => {
   beforeEach(() => {
     queryClient.clear();
     jest.clearAllMocks();
   });
 
-  it('fetches and returns list of movies', async () => {
+  it('fetches and returns list of tv', async () => {
 
-    (api.get as jest.Mock).mockResolvedValueOnce({ data: moviesResponse });
+    (api.get as jest.Mock).mockResolvedValueOnce({ data: tvResponse });
 
-    const { result } = renderHook(() => useGetMovies(), { wrapper });
+    const { result } = renderHook(() => useGetOnAir(), { wrapper });
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
 
-    expect(api.get).toHaveBeenCalledWith('/movie/now_playing?language=en-US&page=1');
-    expect(result.current.data).toEqual(moviesResponse.results);
+    expect(api.get).toHaveBeenCalledWith('/tv/on_the_air?language=en-US&page=1');
+    expect(result.current.data).toEqual(tvResponse.results);
   });
 });

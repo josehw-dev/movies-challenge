@@ -2,32 +2,32 @@ import { FlashList } from '@shopify/flash-list';
 import { SafeAreaView } from 'react-native';
 import { Text, View } from 'react-native-ui-lib';
 
-import useGetPopularMovies from '@/src/hooks/movies/useGetPopularMovies';
-import useGetMovies from '../../../hooks/movies/useGetMovies';
+import useGetTvPopular from '@/src/hooks/tv/useGetTvPopular';
 
 import Loading from '../../../components/Loading';
 import MovieCard from "../../../components/MovieCard";
 
 import router from '../../../constants/router';
-import { Movie } from '../../../models/movies';
 
-import { MoviesStackProps } from '../../../types/navigator';
+import { TV } from '../../../models/tv';
+
+import { TvStackProps } from '../../../types/navigator';
 
 import styles from './styles';
 
 /**
  * Props for the MovieList.
  */
-type Props = MoviesStackProps<router.moviesList>;
+type Props = TvStackProps<router.tvList>;
 /**
  * MovieList screen displays a horizontal list of movies.
  *
  * @param {Props} props - Navigation props for the screen.
  * @returns {JSX.Element} The rendered movie list screen.
  */
-const MovieList = ({navigation}: Props) => {
-  const {data: nowPlayingData, isLoading: isLoadingMovies} = useGetMovies();
-  const {data: popularMovies, isLoading: isLoadingPopular} = useGetPopularMovies();
+const TvList = ({navigation}: Props) => {
+  const {data: popularTvs, isLoading: isLoadingPopular} = useGetTvPopular();
+  const {data: onAirTvs, isLoading: isLoadingOnAir} = useGetTvPopular();
 
   /**
    * Navigates to the movie details.
@@ -35,8 +35,8 @@ const MovieList = ({navigation}: Props) => {
    * @param {number} id - The ID of the selected movie.
    */
   const goToMovieDetails = (id: number) => {
-    navigation.push(router.movieDetails, {
-      movieId: id,
+    navigation.push(router.tvDetails, {
+      tvId: id,
     });
   };
 
@@ -46,7 +46,7 @@ const MovieList = ({navigation}: Props) => {
    * @param {{ item: Movie }} param
    * @returns {JSX.Element} The rendered MovieCard component.
    */
-  const renderItem = ({item}: {item: Movie}) => {
+  const renderItem = ({item}: {item: TV}) => {
     return (
       <MovieCard
         item={item}
@@ -57,7 +57,7 @@ const MovieList = ({navigation}: Props) => {
     );
   };
 
-  if (isLoadingMovies || isLoadingPopular) {
+  if (isLoadingPopular || isLoadingOnAir) {
     return <Loading />;
   }
 
@@ -66,11 +66,11 @@ const MovieList = ({navigation}: Props) => {
       <View flex style={{backgroundColor: 'black'}}>
         <View paddingH-20>
           <View marginB-20>
-            <Text white h2>Now Playing</Text>
+            <Text white h2>Popular</Text>
           </View>
 
           <FlashList
-            data={nowPlayingData}
+            data={popularTvs}
             horizontal
             renderItem={renderItem}
             estimatedItemSize={240}
@@ -81,12 +81,12 @@ const MovieList = ({navigation}: Props) => {
 
         <View paddingH-20>
           <View marginB-20 marginT-30>
-            <Text white h2>Popular</Text>
+            <Text white h2>On The Air</Text>
           </View>
 
           <FlashList
             horizontal
-            data={popularMovies}
+            data={onAirTvs}
             renderItem={renderItem}
             estimatedItemSize={180}
             showsHorizontalScrollIndicator={false}
@@ -98,4 +98,4 @@ const MovieList = ({navigation}: Props) => {
   );
 };
 
-export default MovieList;
+export default TvList;

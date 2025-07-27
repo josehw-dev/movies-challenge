@@ -6,13 +6,6 @@
 
    ```bash
    npm install
-
-   npx react-native run-ios
-   # or
-   npx react-native run-android
-
-   Test
-   npm test
    ```
    
 2. API Key Setup

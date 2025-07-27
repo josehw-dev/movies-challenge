@@ -1,34 +1,31 @@
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
-import MovieCard from '../../app/components/MovieCard';
-import { BASE_IMAGE_URL } from '../../app/constants';
+
+import { mock_movie_one } from '../../mocks/data/movie';
+import MovieCard from '../../src/components/MovieCard';
+import { BASE_IMAGE_URL } from '../../src/constants';
 
 describe('MovieCard', () => {
   const mockOnPress = jest.fn();
-  const movie = {
-    id: 123,
-    title: 'My Movie',
-    backdrop_path: 'path/to/image.jpg',
-  };
 
   it('renders correctly with given props', () => {
     const {getByText, getByTestId} = render(
-      <MovieCard item={movie} onPress={mockOnPress} testID="movie-card" />
+      <MovieCard item={mock_movie_one} onPress={mockOnPress} testID="movie-card" />
     );
 
     expect(getByTestId('movie-card')).toBeTruthy();
-    expect(getByText('My Movie')).toBeTruthy();
+    expect(getByText(mock_movie_one.title)).toBeTruthy();
 
     const image = getByTestId('movie-card').findByType('Image');
-    expect(image.props.source.uri).toBe(`${BASE_IMAGE_URL}/${movie.backdrop_path}`);
+    expect(image.props.source.uri).toBe(`${BASE_IMAGE_URL}/${mock_movie_one.poster_path}`);
   });
 
   it('calls onPress with movie id when pressed', () => {
     const {getByTestId} = render(
-      <MovieCard item={movie} onPress={mockOnPress} testID="movie-card" />
+      <MovieCard item={mock_movie_one} onPress={mockOnPress} testID="movie-card" />
     );
 
     fireEvent.press(getByTestId('movie-card'));
-    expect(mockOnPress).toHaveBeenCalledWith(movie.id);
+    expect(mockOnPress).toHaveBeenCalledWith(mock_movie_one.id);
   });
 });

@@ -1,3 +1,4 @@
-const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w342';
 
-export {BASE_IMAGE_URL};
+export { BASE_IMAGE_URL };
+

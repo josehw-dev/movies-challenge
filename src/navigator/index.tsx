@@ -1,5 +1,3 @@
-import type {NavigationRef} from '../types';
-
 import AppNavigator from './AppNavigator';
 
 const Navigator = () => {
@@ -8,4 +6,5 @@ const Navigator = () => {
   );
 };
 
-export {Navigator as default};
+export { Navigator as default };
+

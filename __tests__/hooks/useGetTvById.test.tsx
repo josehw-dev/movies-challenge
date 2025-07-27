@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react-native';
 
-import { mock_movie_one } from '../../mocks/data/movie';
-import useGetMovieById from '../../src/hooks/movies/useGetMovieById';
+import { mock_tv_one } from '../../mocks/data/tv';
+import useGetTvById from '../../src/hooks/tv/useGetTvById';
 import api from '../../src/utils/api';
 
 jest.mock('../../src/utils/api');
@@ -15,7 +15,7 @@ const wrapper = ({ children }: any) => (
   </QueryClientProvider>
 );
 
-describe('useGetMovieById', () => {
+describe('useGetTvById', () => {
   beforeEach(() => {
     queryClient.clear();
     jest.clearAllMocks();
@@ -26,21 +26,21 @@ describe('useGetMovieById', () => {
     jest.clearAllMocks();
   });
 
-  it('fetches and returns movie data by id', async () => {
-    (api.get as jest.Mock).mockResolvedValueOnce({ data: mock_movie_one });
+  it('fetches and returns tv data by id', async () => {
+    (api.get as jest.Mock).mockResolvedValueOnce({ data: mock_tv_one });
 
-    const { result } = renderHook(() => useGetMovieById(1), { wrapper });
+    const { result } = renderHook(() => useGetTvById(1), { wrapper });
 
     await waitFor(() => {
       expect(result.current.isSuccess).toBe(true);
     });
 
-    expect(api.get).toHaveBeenCalledWith('/movie/1?language=en-US');
-    expect(result.current.data).toEqual(mock_movie_one);
+    expect(api.get).toHaveBeenCalledWith('/tv/1?language=en-US');
+    expect(result.current.data).toEqual(mock_tv_one);
   });
 
   it('does not fetch if id is falsy', () => {
-    const { result } = renderHook(() => useGetMovieById(0), { wrapper });
+    const { result } = renderHook(() => useGetTvById(0), { wrapper });
 
     expect(result.current.isFetching).toBe(false);
   });
